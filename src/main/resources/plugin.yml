@@ -1,6 +1,20 @@
 name: SimpleLifeSteal
 version: '${project.version}'
-main: com.the5gi.The5gi
+main: com.the5gi.SimpleLifeSteal
 api-version: 1.19
 authors: [ the5gi ]
 description: A simple Life Steal plugin that doesn't require a config! Add it to your server and instantly have it working :)
+
+commands:
+  simplelifesteal:
+    description: thingy command
+    usage: /simplelifesteal
+    permission: sls.sls
+  resethearts:
+    description: resets a players hearts
+    usage: /resethearts player
+    permission: sls.admin
+  sethearts:
+    description: sets a players hearts
+    usage: /sethearts player amount
+    permission: sls.admin
