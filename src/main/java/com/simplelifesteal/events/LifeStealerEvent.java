@@ -1,4 +1,4 @@
-package com.the5gi.events;
+package com.simplelifesteal.events;
 
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -6,7 +6,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class LifeStealerEvent implements Listener {

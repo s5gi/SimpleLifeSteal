@@ -1,12 +1,11 @@
-package com.the5gi.commands;
+package com.simplelifesteal.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static com.the5gi.SimpleLifeSteal.logger;
-import static com.the5gi.SimpleLifeSteal.version;
+import static com.simplelifesteal.SimpleLifeSteal.logger;
 
 public class SimpleLifeStealCommand implements CommandExecutor {
     @Override
