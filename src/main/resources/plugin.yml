@@ -1,6 +1,6 @@
 name: SimpleLifeSteal
 version: '${project.version}'
-main: com.the5gi.SimpleLifeSteal
+main: com.simplelifesteal.SimpleLifeSteal
 api-version: 1.19
 authors: [ the5gi ]
 description: A simple Life Steal plugin that doesn't require a config! Add it to your server and instantly have it working :)
