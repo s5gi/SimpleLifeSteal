@@ -22,3 +22,13 @@ commands:
     description: gives a player the heart item
     usage: /giveheartitem player amount
     permission: sls.admin
+  #reviveplayer:
+    #description: Revives a player once they died. Requires the heart item
+    #usage: /reviveplayer player
+    #permission: sls.revive
+  #adminrevive:
+    #description: Forces a revive.
+    #usage: /adminrevive player
+    #permission: sls.admin
+  #getdeadplayers:
+    #usage: /getdeadplayers
