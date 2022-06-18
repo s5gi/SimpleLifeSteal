@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 public final class SimpleLifeSteal extends JavaPlugin {
 
-    public static String version = "1.0.0";
+    public static String version = "1.1.2";
     public static String dataPath;
 
     public static Logger logger;
