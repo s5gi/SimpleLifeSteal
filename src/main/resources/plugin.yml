@@ -22,6 +22,10 @@ commands:
     description: gives a player the heart item
     usage: /giveheartitem player amount
     permission: sls.admin
+  givescroll:
+    description: gives yourself the scroll you desire
+    usage: /givescroll ripped/heart
+    permission: sls.admin
   #reviveplayer:
     #description: Revives a player once they died. Requires the heart item
     #usage: /reviveplayer player

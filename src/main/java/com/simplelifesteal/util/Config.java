@@ -32,6 +32,10 @@ public class Config {
         config.setComment("config.version", "! Do not Change !");
         config.addDefault("config.version", version);
 
+        config.setComment("config.scrollsenabled", "Enables the magical scrolls. See https://www.spigotmc.org/resources/simplelifesteal.102533/ for info.");
+        config.addDefault("config.scrollsenabled", false);
+
+
         List<String> r = new ArrayList<>();
         r.add("gold_block:1");
         r.add("redstone_block:1");
@@ -57,6 +61,10 @@ public class Config {
 
     public static YamlFile getMCConfig() {
         return config;
+    }
+
+    public static boolean getScrollEnabledStatus() {
+        return getMCConfig().getBoolean("config.scrollsenabled");
     }
 
 

@@ -1,18 +1,16 @@
 package com.simplelifesteal;
 
 import com.simplelifesteal.commands.*;
-import com.simplelifesteal.events.HeartUseEvent;
-import com.simplelifesteal.events.LifeStealerEvent;
+import com.simplelifesteal.events.*;
+import com.simplelifesteal.items.Scrolls;
 import com.simplelifesteal.util.Config;
+import com.simplelifesteal.util.tabcompletion.GiveScrollTabComplete;
 import com.simplelifesteal.util.tabcompletion.RevivePlayerTabComplete;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -63,6 +61,11 @@ public final class SimpleLifeSteal extends JavaPlugin {
         recipe.setIngredient('h' , items.get(7));
         recipe.setIngredient('i' , items.get(8));
         this.getServer().addRecipe(recipe);
+
+        
+
+
+
         //recipeHearts
 
 
@@ -72,12 +75,29 @@ public final class SimpleLifeSteal extends JavaPlugin {
         this.getCommand("resethearts").setExecutor(new ResetHeartsCommand());
         this.getCommand("sethearts").setExecutor(new SetHeartsCommand());
         this.getCommand("giveheartitem").setExecutor(new GiveHeartItemCommand());
+        this.getCommand("givescroll").setExecutor(new GiveScrollCommand());
+        this.getCommand("givescroll").setTabCompleter(new GiveScrollTabComplete());
+
+
         //this.getCommand("reviveplayer").setExecutor(new RevivePlayerCommand());
         //this.getCommand("reviveplayer").setTabCompleter(new RevivePlayerTabComplete());
         //this.getCommand("adminrevive").setExecutor(new AdminReviveCommand());
         //this.getCommand("adminrevive").setTabCompleter(new RevivePlayerTabComplete());
 
         //this.getCommand("getdeadplayers").setExecutor(new GetDeadPlayers());
+
+
+        if (Config.getScrollEnabledStatus()) {
+            this.getServer().getPluginManager().registerEvents(new PlayerInteractEntityEvent(), this);
+            this.getServer().getPluginManager().registerEvents(new ScrollUseEvent(), this);
+            this.getServer().getPluginManager().registerEvents(new RandomDropEvent(), this);
+
+            ShapelessRecipe heartScrollRecipe = new ShapelessRecipe(new NamespacedKey(this, "heartscroll"), Scrolls.getHeartScroll(5));
+            heartScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(Scrolls.getDrainedScroll()));
+            heartScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(heart));
+            this.getServer().addRecipe(heartScrollRecipe);
+        }
+
 
         this.getServer().getPluginManager().registerEvents(new LifeStealerEvent() , this);
         this.getServer().getPluginManager().registerEvents(new HeartUseEvent(), this);
