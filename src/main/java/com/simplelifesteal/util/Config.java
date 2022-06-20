@@ -29,9 +29,6 @@ public class Config {
             e.printStackTrace();
         }
 
-        config.setComment("config.version", "! Do not Change !");
-        config.addDefault("config.version", version);
-
         config.setComment("config.scrollsenabled", "Enables the magical scrolls. See https://www.spigotmc.org/resources/simplelifesteal.102533/ for info.");
         config.addDefault("config.scrollsenabled", false);
 
