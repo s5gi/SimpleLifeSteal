@@ -55,7 +55,7 @@ public class Scrolls {
         if (UsesLeft == 1) {
             Effected.getWorld().playSound(effectedLocation, Sound.BLOCK_BEACON_ACTIVATE, 30, 1);
             Effected.getWorld().spawnParticle(Particle.HEART, effectedLocation, 20);
-            User.getInventory().getItemInMainHand().setAmount(0);
+            User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
             User.getInventory().addItem(getDrainedScroll());
         } else if ((UsesLeft > 1)) {
             Effected.getWorld().playSound(effectedLocation, Sound.BLOCK_BEACON_ACTIVATE, 30, 1);
@@ -115,7 +115,7 @@ public class Scrolls {
         User.setVelocity(User.getLocation().getDirection().multiply(1.5));
         int UsesLeft = Integer.parseInt(Scroll.getItemMeta().getDisplayName().substring(24, 25).trim() /*"5"*/);
         if (UsesLeft == 1) {
-            User.getInventory().getItemInMainHand().setAmount(0);
+            User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
             User.getInventory().addItem(getDrainedScroll());
         } else if ((UsesLeft > 1)) {
             User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
