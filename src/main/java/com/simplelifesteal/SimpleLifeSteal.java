@@ -2,8 +2,10 @@ package com.simplelifesteal;
 
 import com.simplelifesteal.commands.*;
 import com.simplelifesteal.events.*;
+import com.simplelifesteal.items.CustomItems;
 import com.simplelifesteal.items.Scrolls;
 import com.simplelifesteal.util.Config;
+import com.simplelifesteal.util.tabcompletion.CustomItemTabComplete;
 import com.simplelifesteal.util.tabcompletion.GiveScrollTabComplete;
 import com.simplelifesteal.util.tabcompletion.RevivePlayerTabComplete;
 import org.bukkit.ChatColor;
@@ -12,6 +14,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -24,18 +27,6 @@ public final class SimpleLifeSteal extends JavaPlugin {
     public static String dataPath;
 
     public static Logger logger;
-    public static ItemStack heart = new ItemStack(Material.BRICK); {
-        ItemMeta heartMeta = heart.getItemMeta();
-        heartMeta.setDisplayName(ChatColor.RED + "Heart");
-        List<String> lore = new ArrayList<>();
-        lore.add("§aUsed to regain hearts you have lost");
-        lore.add("§aBut don't waste them! They are quite expensive!");
-        heartMeta.setLore(lore);
-        heartMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        heart.addUnsafeEnchantment(Enchantment.DURABILITY, 100);
-        heart.setItemMeta(heartMeta);
-    }
 
     @Override
     public void onEnable() {
@@ -46,7 +37,7 @@ public final class SimpleLifeSteal extends JavaPlugin {
 
 
         //recipeHearts
-        ShapedRecipe recipe = new ShapedRecipe( new NamespacedKey(this, "heart"), heart );
+        ShapedRecipe recipe = new ShapedRecipe( new NamespacedKey(this, "heart"), CustomItems.getHeart());
         //recipe.shape( "GRG", "OAO", "DDD" );
         recipe.shape("abc", "def", "ghi");
 
@@ -74,9 +65,10 @@ public final class SimpleLifeSteal extends JavaPlugin {
         this.getCommand("simplelifesteal").setExecutor(new SimpleLifeStealCommand());
         this.getCommand("resethearts").setExecutor(new ResetHeartsCommand());
         this.getCommand("sethearts").setExecutor(new SetHeartsCommand());
-        this.getCommand("giveheartitem").setExecutor(new GiveHeartItemCommand());
         this.getCommand("givescroll").setExecutor(new GiveScrollCommand());
         this.getCommand("givescroll").setTabCompleter(new GiveScrollTabComplete());
+        this.getCommand("customitem").setExecutor(new CustomItemCommand());
+        this.getCommand("customitem").setTabCompleter(new CustomItemTabComplete());
 
 
         //this.getCommand("reviveplayer").setExecutor(new RevivePlayerCommand());
@@ -94,8 +86,28 @@ public final class SimpleLifeSteal extends JavaPlugin {
 
             ShapelessRecipe heartScrollRecipe = new ShapelessRecipe(new NamespacedKey(this, "heartscroll"), Scrolls.getHeartScroll(5));
             heartScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(Scrolls.getDrainedScroll()));
-            heartScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(heart));
+            heartScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(CustomItems.getHeart()));
             this.getServer().addRecipe(heartScrollRecipe);
+
+            ShapelessRecipe leapingScrollRecipe = new ShapelessRecipe(new NamespacedKey(this, "leapingscroll"), Scrolls.getLeapingScroll(5));
+            leapingScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(Scrolls.getDrainedScroll()));
+            leapingScrollRecipe.addIngredient(new RecipeChoice.ExactChoice(CustomItems.getMagicFoot()));
+            this.getServer().addRecipe(leapingScrollRecipe);
+
+
+            ShapedRecipe magicFootRecipe = new ShapedRecipe(new NamespacedKey(this, "magicfoot"), CustomItems.getMagicFoot());
+            magicFootRecipe.shape("abc", "def", "ghi");
+            magicFootRecipe.setIngredient('a', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('b', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('c', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('d', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('e', Material.EMERALD_BLOCK);
+            magicFootRecipe.setIngredient('f', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('g', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('h', Material.RABBIT_FOOT);
+            magicFootRecipe.setIngredient('i', Material.RABBIT_FOOT);
+            this.getServer().addRecipe(magicFootRecipe);
+
         }
 
 

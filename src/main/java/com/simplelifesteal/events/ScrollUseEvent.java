@@ -13,11 +13,23 @@ import org.bukkit.inventory.EquipmentSlot;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.simplelifesteal.SimpleLifeSteal.heart;
 
 public class ScrollUseEvent implements Listener {
     @EventHandler
     public void ScrollUseEvent(PlayerInteractEvent e) {
+
+        if ((e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && ((e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getLeapingScroll(5)))
+                | (e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getLeapingScroll(4)))
+                | (e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getLeapingScroll(3)))
+                | (e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getLeapingScroll(2)))
+                | (e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getLeapingScroll(1)))))
+        {
+            Scrolls.useLeapingScroll(e.getPlayer(), e.getPlayer().getInventory().getItemInMainHand());
+        }
+
+
+
         if ((e.getPlayer().getInventory().getItemInMainHand().isSimilar(Scrolls.getHeartScroll(5))) && (e.getPlayer().isSneaking()) && ((e.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() >= 4)) && (e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             List<Entity> entityList = e.getPlayer().getNearbyEntities(50,50,50);
             List<Player> Effected = new ArrayList<>();

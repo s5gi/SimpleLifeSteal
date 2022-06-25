@@ -18,13 +18,13 @@ commands:
     description: sets a players hearts
     usage: /sethearts player amount
     permission: sls.admin
-  giveheartitem:
-    description: gives a player the heart item
-    usage: /giveheartitem player amount
-    permission: sls.admin
   givescroll:
     description: gives yourself the scroll you desire
     usage: /givescroll ripped/heart
+    permission: sls.admin
+  customitem:
+    description: gives a custom item coded into the plugin
+    usage: /customitem item
     permission: sls.admin
   #reviveplayer:
     #description: Revives a player once they died. Requires the heart item

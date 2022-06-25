@@ -14,11 +14,14 @@ public class GiveScrollCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 1) {
-                if (args[0].equals("ripped")) {
+                if (args[0].equals("drained")) {
                     player.getInventory().addItem(Scrolls.getDrainedScroll());
                 }
                 if (args[0].equals("heart")) {
                     player.getInventory().addItem(Scrolls.getHeartScroll(5));
+                }
+                if (args[0].equals("leaping")) {
+                    player.getInventory().addItem(Scrolls.getLeapingScroll(5));
                 }
             }
 

@@ -26,6 +26,7 @@ public class Scrolls {
     }
 
 
+    //Heart Scroll
     public static ItemStack getHeartScroll(int Durability) {
         ItemStack heartScroll = new ItemStack(Material.PAPER);
         ItemMeta heartScrollMeta = heartScroll.getItemMeta();
@@ -39,8 +40,6 @@ public class Scrolls {
         heartScrollLore.add("§4Put the scroll in your offhand, crouch, and right click");
         heartScrollLore.add("§4and it will heal everyone in a radius of 50 blocks...");
         heartScrollLore.add("§4At the expense of your life, the scroll, and 3 hearts.");
-        heartScrollLore.add(" ");
-        heartScrollLore.add("§9§o[DO NOT STACK. WILL BREAK ITEM ON USE]");
         heartScrollMeta.setLore(heartScrollLore);
         heartScroll.setItemMeta(heartScrollMeta);
 
@@ -51,7 +50,6 @@ public class Scrolls {
 
 
     public static void useHeartScroll(Player User, Player Effected, ItemStack Scroll) {
-        Scroll.getItemMeta().getDisplayName();
         int UsesLeft = Integer.parseInt(Scroll.getItemMeta().getDisplayName().substring(22, 23).trim() /*"5"*/);
         Location effectedLocation = new Location(Effected.getWorld(), Effected.getLocation().getX(), Effected.getLocation().getY() + 2, Effected.getLocation().getZ());
         if (UsesLeft == 1) {
@@ -62,7 +60,7 @@ public class Scrolls {
         } else if ((UsesLeft > 1)) {
             Effected.getWorld().playSound(effectedLocation, Sound.BLOCK_BEACON_ACTIVATE, 30, 1);
             Effected.getWorld().spawnParticle(Particle.HEART, effectedLocation, 20);
-            User.getInventory().getItemInMainHand().setAmount(0);
+            User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
             User.getInventory().addItem(getHeartScroll(UsesLeft - 1));
 
 
@@ -76,7 +74,11 @@ public class Scrolls {
     }
 
     public static void useHeartScrollUltimate(Player User, List<Player> Effected, ItemStack Scroll) {
-        User.getInventory().getItemInMainHand().setAmount(0);
+        if (User.getInventory().getItemInMainHand().getAmount() > 1) {
+            User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
+        } else if (User.getInventory().getItemInMainHand().getAmount() == 1) {
+            User.getInventory().getItemInMainHand().setAmount(0);
+        }
         User.setHealth(0);
         User.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, User.getLocation(), 20);
         User.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(User.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 2);
@@ -87,4 +89,41 @@ public class Scrolls {
             effectedEach.sendMessage("§aYou Have been given full health by §b" + User.getName() + "§a but unfortunately... §4§lIt cost them their life.");
         }
     }
+
+    //Heart Scroll
+
+
+    //Leaping Scroll
+
+
+    public static ItemStack getLeapingScroll(int Durability) {
+        ItemStack leapingScroll = new ItemStack(Material.PAPER);
+        ItemMeta leapingScrollMeta = leapingScroll.getItemMeta();
+
+        //leapingScrollMeta.setDisplayName("" + ChatColor.GREEN + ChatColor.MAGIC + "o" + ChatColor.GREEN + " Heart Scroll [" + Durability + "] " + ChatColor.GREEN + ChatColor.MAGIC + "o");
+        leapingScrollMeta.setDisplayName("" + ChatColor.GREEN + ChatColor.MAGIC + "o" + ChatColor.GREEN + " Leaping Scroll [" + Durability + "] " + ChatColor.GREEN + ChatColor.MAGIC + "o");
+        List<String> leapingScrollLore = new ArrayList<>();
+        leapingScrollLore.add("§b§oUsed as a way to boost yourself in a direction.");
+        leapingScrollLore.add(" ");
+        leapingScrollLore.add("§2Right click to be boosted (-1 Durability)");
+        leapingScrollMeta.setLore(leapingScrollLore);
+        leapingScroll.setItemMeta(leapingScrollMeta);
+
+        return leapingScroll;
+    }
+    public static void useLeapingScroll(Player User, ItemStack Scroll) {
+        User.setVelocity(User.getLocation().getDirection().multiply(1.5));
+        int UsesLeft = Integer.parseInt(Scroll.getItemMeta().getDisplayName().substring(24, 25).trim() /*"5"*/);
+        if (UsesLeft == 1) {
+            User.getInventory().getItemInMainHand().setAmount(0);
+            User.getInventory().addItem(getDrainedScroll());
+        } else if ((UsesLeft > 1)) {
+            User.getInventory().getItemInMainHand().setAmount(User.getInventory().getItemInMainHand().getAmount() - 1);
+            User.getInventory().addItem(getLeapingScroll(UsesLeft - 1));
+        }
+    }
+
+
+    //Leaping Scroll
+
 }

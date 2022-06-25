@@ -6,7 +6,7 @@
 
     <groupId>com</groupId>
     <artifactId>simplelifesteal</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
 
     <name>SimpleLifeSteal</name>

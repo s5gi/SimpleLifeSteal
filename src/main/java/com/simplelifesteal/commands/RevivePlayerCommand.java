@@ -1,6 +1,7 @@
 package com.simplelifesteal.commands;
 
 import com.simplelifesteal.SimpleLifeSteal;
+import com.simplelifesteal.items.CustomItems;
 import com.simplelifesteal.util.Config;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -19,7 +20,7 @@ public class RevivePlayerCommand implements CommandExecutor {
                 if (!(args[0].equals("NoOneAvailable"))) {
                     Player revivedPlayer = player.getServer().getPlayer(args[0]);
                     if (Config.getDeadPlayers().contains(revivedPlayer.getUniqueId().toString())) {
-                        if (player.getInventory().getItemInMainHand().equals(SimpleLifeSteal.heart)) {
+                        if (player.getInventory().getItemInMainHand().equals(CustomItems.getHeart())) {
                             player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                             revivedPlayer.sendMessage("§a[SimpleLifeSteal] You have been revived by: " + player.getName());
                             revivedPlayer.teleport(player.getLocation());
